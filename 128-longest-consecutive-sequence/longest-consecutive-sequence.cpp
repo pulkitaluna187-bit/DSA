@@ -7,22 +7,17 @@ public:
         int longest = 0;
 
         for (int num : s) {
-
-            // Is this the start of a sequence?
-            if (s.find(num - 1) == s.end()) {
-
-                int current = num;
-                int length = 1;
-
-                while (s.find(current + 1) != s.end()) {
-                    current++;
+            if(s.find(num-1)==s.end()){
+                int curr=num;
+                int length=1;
+                while(s.find(curr+1)!=s.end()){
+                    curr++;
                     length++;
                 }
-
-                longest = max(longest, length);
+                longest=max(longest,length);
             }
         }
-
         return longest;
+
     }
 };
