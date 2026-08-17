@@ -13,7 +13,7 @@ public:
                 ans=min(ans,right-left);
                 sum -=nums[left];
                 left++;
-            }
+            }  
         }
         return ans==INT_MAX ? 0 : ans;
     }
