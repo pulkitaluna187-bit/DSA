@@ -1,42 +1,34 @@
 class Solution {
 public:
-
-    bool binarySearch(vector<int>& nums, int si, int ei, int target)
-    {
-        if (si > ei)
-            return false;
-
-        int mid = si + (ei - si) / 2;
-
-        if (nums[mid] == target)
-            return true;
-
-        // NEW CONDITION (only for LC 81)
-        if (nums[si] == nums[mid] && nums[mid] == nums[ei])
-        {
-            return binarySearch(nums, si + 1, ei - 1, target);
-        }
-
-        // Left half is sorted
-        if (nums[si] <= nums[mid])
-        {
-            if (nums[si] <= target && target < nums[mid])
-                return binarySearch(nums, si, mid - 1, target);
-            else
-                return binarySearch(nums, mid + 1, ei, target);
-        }
-
-        // Right half is sorted
-        else
-        {
-            if (nums[mid] < target && target <= nums[ei])
-                return binarySearch(nums, mid + 1, ei, target);
-            else
-                return binarySearch(nums, si, mid - 1, target);
-        }
-    }
-
     bool search(vector<int>& nums, int target) {
-        return binarySearch(nums, 0, nums.size() - 1, target);
+        int n=nums.size();
+        int st=0;
+        int end=n-1;
+        while(st<=end){
+            int mid= st + (end-st)/2;
+            if(nums[mid]==target) return true;
+            if(nums[st]==nums[mid] && nums[mid]==nums[end]){
+                st++;
+                end--;
+                continue;
+            }
+           else if(nums[st]<=nums[mid]){ 
+                if(nums[st]<=target && target< nums[mid]){
+                    end=mid-1;
+                }
+                else{
+                    st=mid+1;
+                }
+            }
+            else{
+                if(nums[mid]<target && target <= nums[end]){
+                    st=mid+1;
+                }
+                else{
+                    end=mid-1;
+                }
+            }
+        }
+        return false;
     }
 };
