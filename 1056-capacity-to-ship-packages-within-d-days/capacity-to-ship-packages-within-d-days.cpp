@@ -1,20 +1,20 @@
 class Solution {
 public:
-    bool noOfDays(vector<int>& weights, int days, int mid){
+    int noOfDays(vector<int>& weights, int days, int mid){
         int sum=0;
-        int cnt=0;
+        int daysReq=1;
         for(int i=0;i<weights.size();i++){
             if(sum+ weights[i]<=mid){
                 sum +=weights[i];
             }
             else{
-                cnt++;
+                daysReq++;
                 sum=weights[i];
             }
             
         }
-        cnt++;
-        return cnt<=days;
+        
+        return daysReq;
     }
     int shipWithinDays(vector<int>& weights, int days) {
         int n=weights.size();
@@ -27,7 +27,7 @@ public:
         
         while(st<=end){
             int mid= (st+end)/2;
-            if(noOfDays(weights,days,mid)){
+            if(noOfDays(weights,days,mid)<=days){
                 end=mid-1;
             }
             else{
